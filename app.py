@@ -11,9 +11,12 @@ from kivy.graphics import Rectangle, Color
 from kivy.factory import Factory
 from kivy.properties import ObjectProperty
 from kivy.uix.popup import Popup
+from kivy.utils import get_color_from_hex
 import os
 from load_dialog import LoadDialog
 from save_dialog import SaveDialog
+
+
 
 class PyTxt(App):
     def build(self):
@@ -34,11 +37,14 @@ class PyTxt(App):
                     size_hint=(None, None),
                     pos=(0,layout.height),
                     background_color="#26367D")
+
+        btn3 = Button()
         btn1.bind(on_press = self.save_file)
         btn2.bind(on_press=self.show_load)
         layout.add_widget(btn1)
         layout.add_widget(btn2)
-        self.code_input = CodeInput(lexer=CythonLexer())
+        self.code_input = CodeInput(lexer=CythonLexer(),auto_indent=True,background_color=get_color_from_hex("#FAF9F6"))
+
         root.add_widget(layout)
         root.add_widget(self.code_input)
         return root
